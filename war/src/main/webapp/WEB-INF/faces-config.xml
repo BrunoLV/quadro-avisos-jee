@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- © Copyright 2009-2012 Piotr Soróbka <psorobka@gmail.com>. Licensed under 
+	the Apache License, Version 2.0 (the "License"); you may not use this file 
+	except in compliance with the License. You may obtain a copy of the License 
+	at http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable 
+	law or agreed to in writing, software distributed under the License is distributed 
+	on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either 
+	express or implied. See the License for the specific language governing permissions 
+	and limitations under the License. -->
+<faces-config version="1.2" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+	
+	<managed-bean>
+		<managed-bean-name>LoginController</managed-bean-name>
+		<managed-bean-class>br.com.porto.amazonas.quadro.mbeans.LoginController</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>UsuarioController</managed-bean-name>
+		<managed-bean-class>br.com.porto.amazonas.quadro.mbeans.UsuarioController</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>AvisoController</managed-bean-name>
+		<managed-bean-class>br.com.porto.amazonas.quadro.mbeans.AvisoController</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-action>#{LoginController.efetuarLogout}</from-action>
+			<from-outcome>sucesso</from-outcome>
+			<to-view-id>/login.jsp</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/login.jsp</from-view-id>
+		<navigation-case>
+			<from-action>#{LoginController.executarLogin}</from-action>
+			<from-outcome>sucesso</from-outcome>
+			<to-view-id>/lista_avisos.jsp</to-view-id>
+			<redirect/>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>registrar</from-outcome>
+			<to-view-id>/cadastro_usuario.jsp</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/lista_avisos.jsp</from-view-id>
+		<navigation-case>
+			<from-action>#{AvisoController.selecionarParaEdicao}</from-action>
+			<from-outcome>editar</from-outcome>
+			<to-view-id>/manutencao_avisos.jsp</to-view-id>
+			<redirect/>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>novo</from-outcome>
+			<to-view-id>/manutencao_avisos.jsp</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/manutencao_avisos.jsp</from-view-id>
+		<navigation-case>
+			<from-action>#{AvisoController.cadastrarAviso}</from-action>
+			<from-outcome>sucesso</from-outcome>
+			<to-view-id>/lista_avisos.jsp</to-view-id>
+			<redirect/>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{AvisoController.cadastrarAviso}</from-action>
+			<from-outcome>falha</from-outcome>
+			<to-view-id>/lista_avisos.jsp</to-view-id>
+			<redirect/>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{AvisoController.cancelarManutencaoAviso}</from-action>
+			<from-outcome>sucesso</from-outcome>
+			<to-view-id>/lista_avisos.jsp</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/cadastro_usuario.jsp</from-view-id>
+		<navigation-case>
+			<from-action>#{UsuarioController.cadastrarUsuario}</from-action>
+			<from-outcome>sucesso</from-outcome>
+			<to-view-id>/login.jsp</to-view-id>
+			<redirect/>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancelar</from-outcome>
+			<to-view-id>/login.jsp</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+	
+	<lifecycle>
+		<phase-listener>br.com.porto.amazonas.quadro.listeners.FacesMessageListener</phase-listener>
+	</lifecycle>
+
+	<application>
+		<view-handler>org.ajax4jsf.application.AjaxViewHandler</view-handler>
+		<locale-config>
+			<default-locale>pt_BR</default-locale>
+			<supported-locale>en_US</supported-locale>
+			<supported-locale>pt_BR</supported-locale>
+		</locale-config>
+		<resource-bundle>
+			<base-name>messages</base-name>
+			<var>msgs</var>
+		</resource-bundle>
+		<resource-bundle>
+			<base-name>errors</base-name>
+			<var>errs</var>
+		</resource-bundle>
+	</application>
+</faces-config>

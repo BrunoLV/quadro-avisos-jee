@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#login.jsp" PATH="/login.jsp"
+  SHAPE="32,129,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#login.jsp:0" NAME="item" PATH="/login.jsp" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="sucesso:#{LoginController.executarLogin}:#lista_avisos.jsp"
+    NAME="output" PATH="/lista_avisos.jsp"
+    TARGET="rules:#lista_avisos.jsp"
+    TITLE="#{LoginController.executarLogin}:sucesso" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="registrar::#cadastro_usuario.jsp"
+    NAME="output2" PATH="/cadastro_usuario.jsp"
+    TARGET="rules:#cadastro_usuario.jsp" TITLE="registrar" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#manutencao_avisos.jsp"
+  PATH="/manutencao_avisos.jsp" SHAPE="256,257,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#manutencao_avisos.jsp:0" NAME="item"
+   PATH="/manutencao_avisos.jsp" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="sucesso:#{AvisoController.cadastrarAviso}:#lista_avisos.jsp"
+    NAME="output" PATH="/lista_avisos.jsp"
+    TARGET="rules:#lista_avisos.jsp"
+    TITLE="#{AvisoController.cadastrarAviso}:sucesso" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="falha:#{AvisoController.cadastrarAviso}:#lista_avisos.jsp"
+    NAME="output1" PATH="/lista_avisos.jsp"
+    TARGET="rules:#lista_avisos.jsp"
+    TITLE="#{AvisoController.cadastrarAviso}:falha" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="sucesso:#{AvisoController.cancelarManutencaoAviso}:#lista_avisos.jsp"
+    NAME="output2" PATH="/lista_avisos.jsp"
+    TARGET="rules:#lista_avisos.jsp"
+    TITLE="#{AvisoController.cancelarManutencaoAviso}:sucesso" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#lista_avisos.jsp" PATH="/lista_avisos.jsp"
+  SHAPE="256,145,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#lista_avisos.jsp:0" NAME="item"
+   PATH="/lista_avisos.jsp" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="editar:#{AvisoController.selecionarParaEdicao}:#manutencao_avisos.jsp"
+    NAME="output" PATH="/manutencao_avisos.jsp"
+    TARGET="rules:#manutencao_avisos.jsp"
+    TITLE="#{AvisoController.selecionarParaEdicao}:editar" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="novo::#manutencao_avisos.jsp" NAME="output1"
+    PATH="/manutencao_avisos.jsp" TARGET="rules:#manutencao_avisos.jsp"
+    TITLE="novo" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#cadastro_usuario.jsp"
+  PATH="/cadastro_usuario.jsp" SHAPE="272,33,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#cadastro_usuario.jsp:0" NAME="item"
+   PATH="/cadastro_usuario.jsp" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="sucesso:#{UsuarioController.cadastrarUsuario}:#login.jsp"
+    NAME="output" PATH="/login.jsp" TARGET="rules:#login.jsp"
+    TITLE="#{UsuarioController.cadastrarUsuario}:sucesso" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="cancelar::#login.jsp" NAME="output1"
+    PATH="/login.jsp" TARGET="rules:#login.jsp" TITLE="cancelar" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:*" PATH="*" SHAPE="48,273,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:0" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="sucesso:#{LoginController.efetuarLogout}:#login.jsp"
+    NAME="output" PATH="/login.jsp" TARGET="rules:#login.jsp"
+    TITLE="#{LoginController.efetuarLogout}:sucesso" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+</PROCESS>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf13858469958680" configfile="/quadro-avisos-jee-war/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="index" x="252" y="108" id="pf13858522957374" referenceLink="//@navigationRule.0/@fromViewId|" path="/index.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="hello" x="288" y="240" id="pf13858522957407" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" path="/hello.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="login" x="227" y="636" id="pf13858685334898" referenceLink="//@navigationRule.0/@fromViewId|" path="/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="manutencao_avisos" x="274" y="1380" id="pf138586853348911" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" path="/manutencao_avisos.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="login" x="122" y="1330" id="pf138586920199913" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" outlinks="pf138591996602222 pf13865273005300" inlinks="pf138591996602222" path="/login.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="login.jsf" x="122" y="2098" id="pf138591973178521" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" path="/login.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="lista_avisos" x="36" y="84" id="pf13865273005301" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" outlinks="pf13865278587036" inlinks="pf13865273005300 pf13865278587037" path="/lista_avisos.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="manutencao_avisos" x="180" y="12" id="pf13865278587038" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf13865278587037" inlinks="pf13865278587036" path="/manutencao_avisos.jsp"/>
+  <links id="pf138591996602222" target="pf138586920199913" source="pf138586920199913" outcome="erro" fromaction="#{LoginController.executarLogin}">
+    <bendPoints d1Height="-36" d2Height="-36"/>
+    <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
+    <bendPoints d1Width="-64" d2Width="-64"/>
+  </links>
+  <links id="pf13865273005300" target="pf13865273005301" source="pf138586920199913" outcome="sucesso" redirect="true" fromaction="#{LoginController.executarLogin}"/>
+  <links id="pf13865278587037" target="pf13865273005301" source="pf13865278587038" outcome="sucesso" redirect="true" fromaction="#{AvisoController.cadastrarAviso}"/>
+  <links id="pf13865278587036" target="pf13865278587038" source="pf13865273005301" outcome="editar" redirect="true" fromaction="#{AvisoController.selecionarParaEdicao}"/>
+</pageflow:Pageflow>
